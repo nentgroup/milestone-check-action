@@ -21,6 +21,18 @@ jobs:
     - uses: actions/setup-node@v4
       with:
           node-version: '20'
+    - name: Create pull request payload fixture
+      run: |
+        cat <<'EOF' > "${RUNNER_TEMP}/event.json"
+        {
+          "pull_request": {
+            "number": 1,
+            "milestone": {
+              "title": "fixture"
+            }
+          }
+        }
+        EOF
     - uses: ./
-      with: 
-        milliseconds: 1000
+      env:
+        GITHUB_EVENT_PATH: ${{ runner.temp }}/event.json
