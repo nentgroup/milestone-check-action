@@ -23,7 +23,7 @@ jobs:
           node-version: '20'
     - name: Create pull request payload fixture
       run: |
-        cat <<'EOF' > "${RUNNER_TEMP}/event.json"
+        cat <<'EOF' > "${{ runner.temp }}/event.json"
         {
           "pull_request": {
             "number": 1,
